@@ -14,9 +14,9 @@
         localStorage.setItem("count", counter);
         
         if(counter >= 5) {
-            document.getElementById('reset').style.display = "block";
+            document.getElementById('reset').style.visibility = "visible";
         } else {
-            document.getElementById('reset').style.display = "none";
+            document.getElementById('reset').style.display = "hidden";
         }
     });
     reset.addEventListener('click', function() {
