@@ -3,38 +3,39 @@
     const overlay = document.getElementById('overlay');
     const reset = document.getElementById('reset');
     const close_element = document.getElementById('x-icon');
+    //endpoint
     const ep_url = "https://jsonplaceholder.typicode.com/users";
+
     let counter = localStorage.getItem("count") || 0;
-    ele.addEventListener('click', function() {
-        //localStorage.removeItem('counter');
-        console.log(localStorage.getItem('count'))
-        document.getElementById("alert-container").style.display = "block";
-        counter++;
-        document.getElementById('alert-text-2').innerHTML = `You have clicked <strong>${counter} times </strong> to related button.`;
-        localStorage.setItem("count", counter);
-        
-        if(counter >= 5) {
-            document.getElementById('reset').style.visibility = "visible";
-        } else {
-            document.getElementById('reset').style.display = "hidden";
-        }
-    });
-    reset.addEventListener('click', function() {
 
-        counter = 0;
-        localStorage.setItem("count", counter);
-        document.getElementById('alert-text-2').innerHTML = `You have clicked <strong>${counter} times </strong> to related button.`;
-    });
-    overlay.addEventListener('click', function() {
-        document.getElementById("alert-container").style.display = "none";
-
-    });
-    close_element.addEventListener('click', function() {
-        document.getElementById("alert-container").style.display = "none";
-    })
-
-
-// TABELKA
+    ele.addEventListener('click', CountAndShowResetButton());
+    reset.addEventListener('click', ResetButton());
+    overlay.addEventListener('click', CloseViaOverlay());
+    close_element.addEventListener('click', CloseViaX());
+function CountAndShowResetButton() {
+    console.log(localStorage.getItem('count'))
+    document.getElementById("alert-container").style.display = "block";
+    counter++;
+    document.getElementById('alert-text-2').innerHTML = `You have clicked <strong>${counter} times </strong> to related button.`;
+    localStorage.setItem("count", counter);    
+    if(counter >= 5) {
+        document.getElementById('reset').style.visibility = "visible";
+    } else {
+        document.getElementById('reset').style.visibility = "hidden";
+    }
+}
+function ResetButton() {
+    counter = 0;
+    localStorage.setItem("count", counter);
+    document.getElementById('alert-text-2').innerHTML = `You have clicked <strong>${counter} times </strong> to related button.`;
+}
+function CloseViaOverlay() {
+    document.getElementById("alert-container").style.display = "none";
+}
+function CloseViaX() {
+    document.getElementById("alert-container").style.display = "none";
+}
+    // TABELKA
 let cust = [];
 async function LoadTable(url) {
     const response = await fetch(url);
@@ -46,7 +47,6 @@ async function LoadTable(url) {
     
 }
 LoadTable(ep_url);
-
 
 function hideloader() {
     document.getElementById('loading').style.display = 'none';
